@@ -1,0 +1,27 @@
+page-discover_tour {
+  ion-content ion-toolbar.toolbar {
+    min-height: 140px !important;
+    padding: 0;
+
+    .toolbar-content {
+      margin-bottom: -3px;
+    }
+
+    .toolbar-background {
+      display: none;
+    }
+
+    .background {
+      min-height: 140px !important;
+
+      + ion-navbar {
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+
+  ion-footer {
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.35);
+  }
+}

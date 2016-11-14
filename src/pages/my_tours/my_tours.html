@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start ios-only>
+      <button ion-button clear (click)="edit()">
+        <span *ngIf="!editing">Edit</span>
+        <span *ngIf="editing">Done</span>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      My Tours
+    </ion-title>
+
+    <ion-buttons end ios-only>
+      <button ion-button clear (click)="new()">New</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <p padding *ngIf="tours.length == 0" text-center>You have not created any tours yet.</p>
+
+  <ion-list *ngIf="offers().length > 0">
+    <ion-list-header>Offers</ion-list-header>
+
+    <ion-item *ngFor="let tour of offers()" (press)="pressTour(tour)">
+      <ion-icon *ngIf="editing" (click)="deleteTour(tour)" name="remove-circle" color="danger" item-left></ion-icon>
+
+      <div item-content padding>
+        <h2>{{tour.title}}</h2>
+
+        <ion-chip color="secondary">
+          <ion-label>{{tour.category || 'Other'}}</ion-label>
+        </ion-chip>
+
+        <p>Expires on {{tour.expiryDate}} at {{tour.expiryTime}}</p>
+      </div>
+
+      <ion-toggle *ngIf="!editing" [(ngModel)]="tour.published"></ion-toggle>
+      <ion-icon *ngIf="editing" name="arrow-forward" item-right (click)="editTour(tour)"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="requests().length > 0">
+    <ion-list-header>Requests</ion-list-header>
+
+    <ion-item *ngFor="let tour of requests()" (press)="pressTour(tour)">
+      <ion-icon *ngIf="editing" (click)="deleteTour(tour)" name="remove-circle" color="danger" item-left></ion-icon>
+
+      <div item-content padding>
+        <h2>{{tour.title}}</h2>
+
+        <ion-chip color="secondary">
+          <ion-label>{{tour.category || 'Other'}}</ion-label>
+        </ion-chip>
+
+        <p>Expires on {{tour.expiryDate}} at {{tour.expiryTime}}</p>
+      </div>
+
+      <ion-toggle *ngIf="!editing" [(ngModel)]="tour.published"></ion-toggle>
+      <ion-icon *ngIf="editing" name="arrow-forward" item-right (click)="editTour(tour)"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab right bottom android-only>
+    <button ion-fab (click)="new()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

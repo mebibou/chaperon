@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <ion-segment [(ngModel)]="type">
+      <ion-segment-button value="single">
+        Single
+      </ion-segment-button>
+      <ion-segment-button value="groups">
+        Groups
+      </ion-segment-button>
+    </ion-segment>
+
+    <button ion-button menuToggle icon-only end>
+      <ion-icon ios="ios-options-outline" md="md-options"></ion-icon>
+    </button>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   placeholder="Search by keyword">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div [ngSwitch]="type">
+    <ion-list *ngSwitchCase="'single'">
+      <ion-card *ngFor="let element of singles" (click)="openTour(element)">
+        <img *ngIf="element.image" [src]="element.image"/>
+
+        <ion-card-content>
+          <ion-card-title>{{element.title}}</ion-card-title>
+          <p>{{element.description}}</p>
+          <small text-muted>{{element.price}}</small>
+        </ion-card-content>
+
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="primary" icon-left>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="primary" icon-left>
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'groups'">
+      <ion-card *ngFor="let element of groups" (click)="openTour(element)">
+        <img *ngIf="element.image" [src]="element.image"/>
+
+        <ion-card-content>
+          <ion-card-title>{{element.title}}</ion-card-title>
+          <p>{{element.description}}</p>
+          <small text-muted>{{element.price}}</small>
+        </ion-card-content>
+
+        <ion-row no-padding>
+          <ion-col>
+            <button ion-button clear small color="primary" icon-left>
+              <ion-icon name='star'></ion-icon>
+              Favorite
+            </button>
+          </ion-col>
+          <ion-col text-right>
+            <button ion-button clear small color="primary" icon-left>
+              <ion-icon name='share-alt'></ion-icon>
+              Share
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-list>
+  </div>
+</ion-content>

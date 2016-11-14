@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <span *ngIf="!tour.title">New tour</span>
+      <span *ngIf="tour.title">{{tour.title}}</span>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form>
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label>I want to</ion-label>
+        <ion-select [(ngModel)]="tour.type" name="type" placeholder="Select" required>
+          <ion-option value="request">Request a tour</ion-option>
+          <ion-option value="offer">Offer a tour</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type="text" [(ngModel)]="tour.title" name="title" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-textarea [(ngModel)]="tour.description" name="description"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-select [(ngModel)]="tour.category" name="category" required>
+          <ion-option>Outdoor activity</ion-option>
+          <ion-option>Museums</ion-option>
+          <ion-option>Going out</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Expires on</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="tour.expiryDate" name="expiry_date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Expires at</ion-label>
+        <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="tour.expiryTime" name="expiry_time"></ion-datetime>
+      </ion-item>
+
+      <ion-item *ngIf="tour.type == 'offer'">
+        <ion-label>Price</ion-label>
+        <ion-input type="text" [(ngModel)]="tour.price.lower" name="price"></ion-input>
+      </ion-item>
+
+      <ion-item *ngIf="tour.type == 'request'">
+        <ion-label>Price range (${{tour.price.lower}} - ${{tour.price.upper}})</ion-label>
+        <ion-range max="1000" dualKnobs="true" pin="true" [(ngModel)]="tour.price" name="price" dark no-padding>
+          <ion-icon range-left small name="star-half"></ion-icon>
+          <ion-icon range-right name="star"></ion-icon>
+        </ion-range>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Currency</ion-label>
+        <ion-select [(ngModel)]="tour.currency" name="currency">
+          <ion-option>AUD</ion-option>
+          <ion-option>HKD</ion-option>
+          <ion-option>USD</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Accept groups</ion-label>
+        <ion-toggle checked="false" [(ngModel)]="tour.groups" name="groups"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button block (click)="create()">Save</button>
+  </form>
+</ion-content>

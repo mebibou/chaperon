@@ -1,0 +1,50 @@
+<ion-content>
+  <ion-toolbar color="primary">
+    <div *ngIf="tour.image" class="background">
+      <img [src]="tour.image"/>
+    </div>
+
+    <ion-navbar>
+      <ion-title>{{tour.title}}</ion-title>
+    </ion-navbar>
+  </ion-toolbar>
+
+  <div padding class="about-info">
+    <p>{{tour.description}}</p>
+    <small text-muted>{{tour.price}}</small>
+  </div>
+
+  <ion-list>
+    <ion-list-header>{{tour.reviews.length}} reviews</ion-list-header>
+
+    <ion-item *ngFor="let review of tour.reviews">
+      <ion-avatar *ngIf="review.image" item-left>
+        <img [src]="review.image">
+      </ion-avatar>
+
+      <p>{{review.content}}</p>
+      <small>{{review.user}}</small>
+
+      <ion-row no-padding>
+        <ion-col>
+          <ion-icon name='star' color="secondary"></ion-icon>
+          <ion-icon name='star' color="secondary"></ion-icon>
+          <ion-icon name='star-half' color="secondary"></ion-icon>
+          <ion-icon name='star-outline' color="secondary"></ion-icon>
+          <ion-icon name='star-outline' color="secondary"></ion-icon>
+        </ion-col>
+        <ion-col text-right>
+          <small>{{review.date}}</small>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="white">
+    <button ion-button block color="royal">
+      <ion-icon name="card"></ion-icon>&nbsp;Book now
+    </button>
+  </ion-toolbar>
+</ion-footer>
